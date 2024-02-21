@@ -16,8 +16,14 @@ def step_2(args):
     n = int(args[1])
     k1 = float(args[2])
     k2 = float(args[3])
-    for i in range():
-        pass
+    populations = [n]
+    for i in range(0, 100):
+        if i != 0:
+            if i < 50:
+                populations.append(populations[i - 1] * k1 * (1000 - populations[i - 1]) / 1000)
+            else:
+                populations.append(populations[i - 1] * k2 * (1000 - populations[i -1]) / 1000)
+        print(f"{i + 1} {populations[i]:.2f}")
 
 
 def main(args):
