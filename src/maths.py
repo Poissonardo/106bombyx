@@ -1,4 +1,4 @@
-from user_input import *
+from .user_input import *
 
 def get_i0_num(n, k, i0):
     populations = [n]

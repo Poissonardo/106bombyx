@@ -1,4 +1,4 @@
-from error_handling import *
+from .error_handling import *
 
 def get_user_int(value: str) -> int:
     try:
