@@ -1,6 +1,40 @@
 #!/usr/bin/python3
 from sys import argv
 
+PROJECT_NAME = "106bombyx"
+
+class NegativeNumberException(Exception):
+    pass
+
+def display_error(error: str) -> None:
+    print(PROJECT_NAME + ": " + error)
+
+def get_user_int(value: str) -> int:
+    try:
+        n = int(value)
+        if (n < 0):
+            raise NegativeNumberException
+    except ValueError:
+        display_error("Invalid argument \"{}\", please enter a valid integer value".format(value))
+        exit(84)
+    except NegativeNumberException:
+        display_error("Invalid argument \"{}\", please enter a positive value".format(value))
+        exit(84)
+    return n
+
+def get_user_float(value: str) -> float:
+    try:
+        k = float(value)
+        if (k < 0):
+            raise NegativeNumberException
+    except ValueError:
+        display_error("Invalid argument \"{}\", please enter a valid floating point number".format(value))
+        exit(84)
+    except NegativeNumberException:
+        display_error("Invalid argument \"{}\", please enter a positive value".format(value))
+        exit(84)
+    return k
+
 def get_i0_num(n, k, i0):
     populations = [n]
     first_gen = 0
@@ -10,10 +44,9 @@ def get_i0_num(n, k, i0):
         first_gen = populations[i]
     return first_gen
 
-
 def case1(args):
-    n = int(args[1])
-    k = float(args[2])
+    n = get_user_int(args[1])
+    k = get_user_float(args[2])
     populations = [n]
     for i in range(0, 100):
         if i != 0:
@@ -22,9 +55,9 @@ def case1(args):
 
 def case2(args):
     k = 1.00
-    n = int(args[1])
-    i0 = int(args[2])
-    i1 = int(args[3])
+    n = get_user_int(args[1])
+    i0 = get_user_int(args[2])
+    i1 = get_user_int(args[3])
 
     while (k <= 4):
         i0_individuals_number = get_i0_num(n, k, i0)
@@ -36,16 +69,20 @@ def case2(args):
         k += 0.01
 
 def main(args):
-    if len(args) == 3:
+    nb_args = len(args)
+
+    if nb_args == 3:
         case1(args)
         exit(0)
-    elif len(args) == 4:
+    elif nb_args == 4:
         case2(args)
         exit(0)
-    else:
+    elif nb_args == 2 and args[1] == "-h":
         print("USAGE\n\t./106bombyx n [k | i0 i1]\nDESCRIPTION\n\tn\tnumber of first generation individuals\n\tk\tgrowth rate from 1 to 4\n\ti0\tinitial generation (included)\n\ti1\tfinal generation (included)")
+        exit(0)
+    else:
+        display_error("Wrong argument number (try \"-h\" to display help)")
         exit(84)
-
 
 if __name__ == '__main__':
     main(argv)
