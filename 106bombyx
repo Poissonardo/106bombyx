@@ -1,8 +1,17 @@
 #!/usr/bin/python3
 from sys import argv
 
+def get_i0_num(n, k, i0):
+    populations = [n]
+    first_gen = 0
+    for i in range(0, i0):
+        if i != 0:
+            populations.append(populations[i - 1] * k * (1000 - populations[i - 1]) / 1000)
+        first_gen = populations[i]
+    return first_gen
 
-def step_1(args):
+
+def case1(args):
     n = int(args[1])
     k = float(args[2])
     populations = [n]
@@ -11,30 +20,27 @@ def step_1(args):
             populations.append(populations[i - 1] * k * (1000 - populations[i - 1]) / 1000)
         print(f"{i + 1} {populations[i]:.2f}")
 
-
-def step_2(args):
+def case2(args):
     k = 1.00
     n = int(args[1])
     i0 = int(args[2])
     i1 = int(args[3])
-    for i in range(301):
-        print("\n")
-        for j in range(i1 - i0 + 1):
-            populations = [n]
-            for i_bis in range(0, i1 + 1):
-                if i_bis != 0:
-                    populations.append(populations[i_bis - 1] * k * (1000 - populations[i_bis - 1]) / 1000)
-            result = populations[i0 + j]
-            print(f"{k:.2f} {result:.2f}")
-        k += 0.01
 
+    while (k <= 4):
+        i0_individuals_number = get_i0_num(n, k, i0)
+        populations = [i0_individuals_number]
+        for i in range(i1 - (i0 - 1)):
+            if i != i1:
+                populations.append(populations[i - 1] * k * (1000 - populations[i - 1]) / 1000)
+            print(f"{k:.2f} {populations[i]:.2f}")
+        k += 0.01
 
 def main(args):
     if len(args) == 3:
-        step_1(args)
+        case1(args)
         exit(0)
     elif len(args) == 4:
-        step_2(args)
+        case2(args)
         exit(0)
     else:
         print("USAGE\n\t./106bombyx n [k | i0 i1]\nDESCRIPTION\n\tn\tnumber of first generation individuals\n\tk\tgrowth rate from 1 to 4\n\ti0\tinitial generation (included)\n\ti1\tfinal generation (included)")
