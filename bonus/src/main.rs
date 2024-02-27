@@ -21,7 +21,7 @@ fn get_user_int(value: &String) -> i32 {
                 display_error(format!("Invalid argument \"{}\", please enter a positive value", value).as_str());
                 exit(84);
             }
-            if result >= 1000 {
+            if result > 1000 {
                 display_error(format!("Invalid argument \"{}\", please enter a value bellow 1000", value).as_str());
                 exit(84);
             }

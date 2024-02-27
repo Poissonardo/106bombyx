@@ -5,7 +5,7 @@ def get_user_int(value: str) -> int:
         n = int(value)
         if (n < 0):
             raise NegativeNumberException
-        if (n >= 1000):
+        if (n > 1000):
             raise AboveLimitValue
     except ValueError:
         display_error("Invalid argument \"{}\", please enter a valid integer value".format(value))
@@ -14,7 +14,7 @@ def get_user_int(value: str) -> int:
         display_error("Invalid argument \"{}\", please enter a positive value".format(value))
         exit(84)
     except AboveLimitValue:
-        display_error("Invalid argument \"{}\", is above limit of 999".format(value))
+        display_error("Invalid argument \"{}\", is above limit of 1000".format(value))
         exit(84)
     return n
 
