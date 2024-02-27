@@ -27,6 +27,9 @@ def case2(args):
     i0 = get_user_int(args[2])
     i1 = get_user_int(args[3])
 
+    if i0 > i1:
+        display_error("Invalid argument \"{}\", i1 must be superior to i0".format(i1))
+        exit(84)
     while (k <= 4):
         i0_individuals_number = get_i0_num(n, k, i0)
         populations = [i0_individuals_number]
