@@ -13,6 +13,9 @@ def case1(args):
     n = get_user_int(args[1])
     k = get_user_float(args[2])
     populations = [n]
+    if n > 1000:
+        display_error("Invalid argument \"{}\", please enter a valid integer value".format(n))
+        exit(84)
     for i in range(0, 100):
         if i != 0:
             populations.append(populations[i - 1] * k * (1000 - populations[i - 1]) / 1000)
