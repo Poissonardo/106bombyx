@@ -83,6 +83,10 @@ fn case2(args: Vec<String>) {
     let i1 = get_user_int(&args[3]);
     let mut result;
 
+    if i0 > i1 {
+        display_error(format!("Invalid argument \"{}\", i1 must be superior to i0", i1).as_str());
+        exit(84);
+    }
     if n > 1000 {
         display_error(format!("Invalid argument \"{}\", please enter a value bellow 1000", n).as_str());
         exit(84);
