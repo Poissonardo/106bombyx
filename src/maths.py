@@ -1,4 +1,5 @@
 from .user_input import *
+from math import ceil
 
 def get_i0_num(n, k, i0):
     populations = [n]
@@ -27,6 +28,9 @@ def case2(args):
     i0 = get_user_int(args[2])
     i1 = get_user_int(args[3])
 
+    if n > 1000:
+        display_error("Invalid argument \"{}\", please enter a valid integer value".format(n))
+        exit(84)
     if i0 > i1:
         display_error("Invalid argument \"{}\", i1 must be superior to i0".format(i1))
         exit(84)
@@ -35,6 +39,6 @@ def case2(args):
         populations = [i0_individuals_number]
         for i in range(i1 - (i0 - 1)):
             if i != i1:
-                populations.append(populations[i - 1] * k * (1000 - populations[i - 1]) / 1000)
-            print(f"{k:.2f} {populations[i]:.2f}")
+                populations.append(populations[i - 1] * k * (1000.0 - populations[i - 1]) / 1000.0)
+            print(f"{ceil(k * 100) / 100} {ceil(populations[i] * 100) / 100}")
         k += 0.01

@@ -16,7 +16,7 @@ def get_user_int(value: str) -> int:
 def get_user_float(value: str) -> float:
     try:
         k = float(value)
-        if (k < 0):
+        if (k < 1):
             raise NegativeNumberException
         if (k > 4):
             raise KInvalidValue
