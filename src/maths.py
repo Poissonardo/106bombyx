@@ -1,6 +1,6 @@
 from .user_input import *
-from decimal import Decimal
-from math import ceil
+from decimal import *
+from math import floor
 
 def get_i0_num(n, k, i0):
     populations = [Decimal(n)]
@@ -24,8 +24,8 @@ def case1(args):
         print(f"{i + 1} {populations[i]:.2f}")
 
 def case2(args):
-    k = Decimal(1)
-    n = Decimal(get_user_int(args[1]))
+    k = Decimal('1')
+    n = get_user_int(args[1])
     i0 = get_user_int(args[2])
     i1 = get_user_int(args[3])
 
@@ -35,11 +35,11 @@ def case2(args):
     if i0 > i1:
         display_error("Invalid argument \"{}\", i1 must be superior to i0".format(i1))
         exit(84)
-    while (k <= 4):
+    while (k <= Decimal('4.0')):
         i0_individuals_number = get_i0_num(n, k, i0)
-        populations = [i0_individuals_number]
+        result = i0_individuals_number
         for i in range(i1 - (i0 - 1)):
             if i != i1:
-                populations.append(Decimal(populations[i - 1]) * Decimal(k) * (Decimal(1000) - Decimal(populations[i - 1])) / Decimal(1000))
-            print(f"{k:.2f} {populations[i]:.2f}")
-        k += Decimal(0.01)
+                result = result * k * (Decimal('1000') - Decimal(result)) / Decimal('1000')
+            print(f"{k} {result:.2f}")
+        k = k + Decimal('0.01')
