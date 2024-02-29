@@ -41,5 +41,5 @@ def case2(args):
         for i in range(i1 - (i0 - 1)):
             if i != i1:
                 result = result * k * (Decimal('1000') - Decimal(result)) / Decimal('1000')
-            print(f"{k} {result:.2f}")
+            print(f"{k:.2f} {result:.2f}")
         k = k + Decimal('0.01')
